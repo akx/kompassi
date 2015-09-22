@@ -20,10 +20,10 @@ from labour.models import (
     LabourEventMeta,
     Qualification,
     WorkPeriod,
-)
+    PersonnelClass)
 from programme.models import ProgrammeEventMeta, Category, Programme, Room, Role, TimeBlock, SpecialStartTime, View, Tag
 from tickets.models import TicketsEventMeta, LimitGroup, Product
-from badges.models import BadgesEventMeta, Template
+from badges.models import BadgesEventMeta
 
 from ...models import SignupExtra, SpecialDiet, Night
 
@@ -557,7 +557,7 @@ class Command(BaseCommand):
             u'Lauantailippu',
             u'Sunnuntailippu',
         ]:
-            Template.objects.get_or_create(
+            PersonnelClass.objects.get_or_create(
                 event=event,
                 slug=slugify(template_name),
                 defaults=dict(
