@@ -1,2 +1,4 @@
 flake8==2.4.1
 isort==4.2.1
+pytest-django~=2.9.1
+pytest-cov~=2.3.0
