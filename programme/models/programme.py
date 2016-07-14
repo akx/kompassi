@@ -267,17 +267,9 @@ class Programme(models.Model, CsvExportMixin):
 
     @property
     def formatted_hosts(self):
-        from .programme_role import ProgrammeRole
-        from .freeform_organizer import FreeformOrganizer
+        parts = [f.text for f in self.freeform_organizer_texts]
 
-        parts = [f.text for f in FreeformOrganizer.objects.filter(programme=self)]
-
-        public_programme_roles = ProgrammeRole.objects.filter(
-            programme=self,
-            role__is_public=True
-        ).select_related('person')
-
-        parts.extend(pr.person.display_name for pr in public_programme_roles)
+        parts.extend(pr.person.display_name for pr in self.public_programme_role_people)
 
         return u', '.join(parts)
 
